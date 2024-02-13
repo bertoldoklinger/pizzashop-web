@@ -23,7 +23,7 @@ export function SignIn() {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<SignInForm>({
-    defaultValues: { email: searchParams.get('email') || '' },
+    defaultValues: { email: searchParams.get('email') ?? '' },
   })
 
   const { mutateAsync: authenticate } = useMutation({
@@ -32,7 +32,7 @@ export function SignIn() {
 
   async function handleSignIn(data: SignInForm) {
     try {
-      authenticate({ email: data.email })
+      await authenticate({ email: data.email })
       toast.success('Enviamos um link de autenticação para seu e-mail', {
         action: {
           label: 'Reenviar',
